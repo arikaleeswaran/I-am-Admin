@@ -11,9 +11,13 @@ import PsychologyIcon from '@mui/icons-material/Psychology';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import {Link} from "react-router-dom";
+import { useContext } from "react";
+import { DarkModeContext } from "../../context/darkModeReducer";
 
 
 function Sidebar() {
+    const {dispatch} = useContext(DarkModeContext)
+
   return (
     <div className="sidebar">
         <div className="top">
@@ -86,8 +90,8 @@ function Sidebar() {
             </ul>
         </div>
         <div className="bottom">
-            <div className="coloroption"></div>
-            <div className="coloroption"></div>
+            <div className="coloroption" onClick={()=>dispatch({type:"LIGHT"})}></div>
+            <div className="coloroption" onClick={()=>dispatch({type:"DARK"})}></div>
         </div>
     </div>
   )

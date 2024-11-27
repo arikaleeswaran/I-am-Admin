@@ -30,6 +30,7 @@ function Datatable() {
             </Link>
         </div>
         <DataGrid
+        className="datagrid"
             rows={userRows}
             columns={userColumns.concat(actionColumn)}
             pageSizeOptions={[5,10]}
