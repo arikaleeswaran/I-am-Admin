@@ -2,6 +2,7 @@ import "./single.scss"
 import Sidebar from "../../components/sidebar/Sidebar.jsx"
 import Navbar from "../../components/navbar/Navbar.jsx"
 import Chart from "../../components/chart/Chart.jsx"
+import List from "../../components/table/Table.jsx"
 
 function Single() {
   return (
@@ -43,8 +44,10 @@ function Single() {
             <Chart aspect ={3/1} title="User Spending (Last 6 Months"/>
           </div>
         </div>
-        <div className="bottom"></div>
-        Single
+        <div className="bottom">
+        <h1 className="title">Last Transactions</h1>
+          <List/>
+        </div>
       </div>
     </div>
   )
