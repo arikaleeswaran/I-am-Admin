@@ -22,11 +22,10 @@ function Datatable({columns}) {
     
 const handleDelete = async (id)=>{
     try{
-        console.log(`Attempting to delete: /${path}/${id}`);
-
-        const res = await axios.delete(`/${path}/${id}`);
-        console.log(res);
         
+        console.log(`Attempting to delete: /${path}/${id}`);
+        const res = await axios.delete(`/${path}/${id}`);
+        // console.log(res);   
         setList(currentList => currentList.filter(item => item._id !== id));
 
     }catch(err){
