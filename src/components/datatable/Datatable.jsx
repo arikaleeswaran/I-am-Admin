@@ -19,6 +19,7 @@ function Datatable({columns}) {
     useEffect(()=>{
         setList(data)
     },[data])
+    
 const handleDelete = async (id)=>{
     try{
         console.log(`Attempting to delete: /${path}/${id}`);
@@ -42,7 +43,7 @@ const handleDelete = async (id)=>{
         renderCell:(params)=>{
             return (
                 <div className="cellAction">
-                    <Link to={`/users/${params.row._id}`} style={{textDecoration:"none"}}>
+                    <Link to={`/${path}/${params.row._id}`} style={{textDecoration:"none"}}>
                     <div className="viewButton">View</div>
                     </Link>
                     <div className="deleteButton" onClick={()=>handleDelete(params.row._id)}>Delete</div>
@@ -53,7 +54,7 @@ const handleDelete = async (id)=>{
   return (
     <div className="datatable">
         <div className="datatableTitle">
-            Add New User
+            {path}
             <Link to={`/${path}/new`} style={{textDecoration:"none"}} className="link">
                 Add New
             </Link>

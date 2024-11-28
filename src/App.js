@@ -17,6 +17,7 @@ import { AuthContext } from "./context/AuthContext";
 import { Navigate } from "react-router-dom";
 import { hotelColumns, roomColumns, userColumns } from "./datatablesource";
 import NewHotel from "./pages/newHotel/NewHotel";
+import NewRoom from "./pages/newRoom/NewRoom"
 
 function App() {
 
@@ -66,7 +67,7 @@ function App() {
                 </ProtectedRoute>}/>
               <Route path="new" element={
                 <ProtectedRoute>
-                  <New inputs={productInputs} title="Add New Hotel"/>
+                  <NewHotel/>
                 </ProtectedRoute>}/>
             </Route>
             <Route path="rooms">
@@ -80,7 +81,7 @@ function App() {
                 </ProtectedRoute>}/>
               <Route path="new" element={
                 <ProtectedRoute>
-                  <NewHotel/>
+                  <NewRoom/>
                 </ProtectedRoute>}/>
             </Route>
           </Route>
