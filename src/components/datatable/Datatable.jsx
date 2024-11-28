@@ -7,7 +7,7 @@ import useFetch from "../../hooks/useFetch"
 import axios from "axios";
 
 
-function Datatable() {
+function Datatable({columns}) {
 
     const location = useLocation();
     const path = location.pathname.split("/")[1];
@@ -54,14 +54,14 @@ const handleDelete = async (id)=>{
     <div className="datatable">
         <div className="datatableTitle">
             Add New User
-            <Link to={"/users/new"} style={{textDecoration:"none"}} className="link">
+            <Link to={`/${path}/new`} style={{textDecoration:"none"}} className="link">
                 Add New
             </Link>
         </div>
         <DataGrid
             className="datagrid"
             rows={list}
-            columns={userColumns.concat(actionColumn)}
+            columns={columns.concat(actionColumn)}
             pageSizeOptions={[5,10]}
             // rowPerPageOptioms = {[9]}
             checkboxSelection

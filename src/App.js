@@ -15,7 +15,8 @@ import { useContext, useState } from "react";
 import { DarkModeContext } from "./context/darkModeReducer";
 import { AuthContext } from "./context/AuthContext";
 import { Navigate } from "react-router-dom";
-import { userColumns } from "./datatablesource";
+import { hotelColumns, roomColumns, userColumns } from "./datatablesource";
+import NewHotel from "./pages/newHotel/NewHotel";
 
 function App() {
 
@@ -54,15 +55,32 @@ function App() {
                   <New inputs={userInputs} title = "Add New User"/>
                 </ProtectedRoute>}/>
             </Route>
-            <Route path="products">
-              <Route index element={<List/>}/>
+            <Route path="hotels">
+              <Route index element={
+                <ProtectedRoute>
+                <List columns={hotelColumns}/>
+              </ProtectedRoute>}/>
               <Route path=":productId" element={
                 <ProtectedRoute>
                   <Single/>
                 </ProtectedRoute>}/>
               <Route path="new" element={
                 <ProtectedRoute>
-                  <New inputs={productInputs} title="Add New Product"/>
+                  <New inputs={productInputs} title="Add New Hotel"/>
+                </ProtectedRoute>}/>
+            </Route>
+            <Route path="rooms">
+              <Route index element={
+                <ProtectedRoute>
+                <List columns={roomColumns}/>
+              </ProtectedRoute>}/>
+              <Route path=":productId" element={
+                <ProtectedRoute>
+                  <Single/>
+                </ProtectedRoute>}/>
+              <Route path="new" element={
+                <ProtectedRoute>
+                  <NewHotel/>
                 </ProtectedRoute>}/>
             </Route>
           </Route>
