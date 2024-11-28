@@ -1,15 +1,38 @@
 import "./datatable.scss"
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { userColumns,userRows } from "../../datatablesource";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import useFetch from "../../hooks/useFetch"
+import axios from "axios";
 
 
 function Datatable() {
-    const [data,setData] = useState(userRows)
 
-const handleDelete = (id)=>{
-    setData(prevData => prevData.filter(item => item.id !== id));
+    const location = useLocation();
+    const path = location.pathname.split("/")[1];
+    console.log(path,"path");
+    
+    const [list, setList] = useState([]);
+    const{data,loading,error} = useFetch(`/${path}`)
+
+    useEffect(()=>{
+        setList(data)
+    },[data])
+const handleDelete = async (id)=>{
+    try{
+        console.log(`Attempting to delete: /${path}/${id}`);
+
+        const res = await axios.delete(`/${path}/${id}`);
+        console.log(res);
+        
+        setList(currentList => currentList.filter(item => item._id !== id));
+
+    }catch(err){
+            console.error("Error deleting item:", err);
+            alert("Failed to delete the item. Please try again.");
+    }
+    // setList(list => list.filter(item => item._id !== id));
 }
 
     const actionColumn = [{ 
@@ -19,10 +42,10 @@ const handleDelete = (id)=>{
         renderCell:(params)=>{
             return (
                 <div className="cellAction">
-                    <Link to={`/users/${params.row.id}`} style={{textDecoration:"none"}}>
+                    <Link to={`/users/${params.row._id}`} style={{textDecoration:"none"}}>
                     <div className="viewButton">View</div>
                     </Link>
-                    <div className="deleteButton" onClick={()=>handleDelete(params.row.id)}>Delete</div>
+                    <div className="deleteButton" onClick={()=>handleDelete(params.row._id)}>Delete</div>
                 </div>
             );
         },
@@ -37,11 +60,12 @@ const handleDelete = (id)=>{
         </div>
         <DataGrid
             className="datagrid"
-            rows={data}
+            rows={list}
             columns={userColumns.concat(actionColumn)}
             pageSizeOptions={[5,10]}
             // rowPerPageOptioms = {[9]}
             checkboxSelection
+            getRowId={row => row._id}
             // sx={{ border: 0 }}
         />
     </div>

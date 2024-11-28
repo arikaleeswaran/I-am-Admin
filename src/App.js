@@ -15,6 +15,7 @@ import { useContext, useState } from "react";
 import { DarkModeContext } from "./context/darkModeReducer";
 import { AuthContext } from "./context/AuthContext";
 import { Navigate } from "react-router-dom";
+import { userColumns } from "./datatablesource";
 
 function App() {
 
@@ -42,7 +43,7 @@ function App() {
             <Route path="users">
               <Route index element={
                 <ProtectedRoute>
-                <List/>
+                <List columns={userColumns}/>
               </ProtectedRoute>}/>
               <Route path=":userId" element={
                 <ProtectedRoute>
